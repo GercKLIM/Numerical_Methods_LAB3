@@ -92,7 +92,11 @@ bool CrossScheme(const PDEProblem &problem, const string &filename) {
         std::vector<double> state_j = initializeState(problem);
 
         // Аппроксимация первого слоя ("jp" = "j+1")
-        std::vector<double> state_jp = firstLayerApproximation(state_j, problem);
+        std::vector<double> state_jp(num_space_steps+1,0);
+        if(problem.f_xx_is_set)
+            state_jp = firstLayerApproximation(state_j, problem, problem.f_xx);
+        else
+            state_jp = firstLayerApproximation(state_j, problem);
 
         // Инициализация второго слоя ("jpp" = "j+1+1")
         std::vector<double> state_jpp = state_jp;

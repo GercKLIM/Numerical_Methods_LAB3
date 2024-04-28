@@ -40,6 +40,10 @@ public:
 
     // Воздействие внешних сил (F(x,t)) (если == 0, то уравнение - однородное)
     std::function<double(double, double)> extForcesFunction;
+
+    // f_xx (вторая производная функции распределения отклонений точек в начальный момент)
+    std::function<double(double)> f_xx;
+    bool f_xx_is_set = false;
 };
 
 
