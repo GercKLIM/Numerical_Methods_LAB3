@@ -9,6 +9,6 @@
 #include "algebra.h"
 #include "FileIO.h"
 
-bool CrossScheme(const PDEProblem &problem, const std::string &filename ="CrossScheme");
+bool CrossScheme(const PDEProblem &problem, const std::string& filename ="CrossScheme");
 
 #endif //CODE_PDESOLVER_H

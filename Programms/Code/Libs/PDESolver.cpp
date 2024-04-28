@@ -16,6 +16,7 @@ std::vector<double> firstLayerApproximation(const std::vector<double> &state0, c
         x_i += problem.h;
         new_state[i] = problem.tau * problem.initVelocityFunc(x_i) + state0[i];
     }
+
     x_i += problem.h;
     new_state[problem.num_space_steps] = problem.rightBoundaryFunction(x_i);
 
