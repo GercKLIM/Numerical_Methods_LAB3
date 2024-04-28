@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Libs/algebra.h"
+#include "Libs/PDESolver.h"
 
 int main()
 {
