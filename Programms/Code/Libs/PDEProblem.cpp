@@ -6,6 +6,7 @@
 #include "PDEProblem.h"
 
 PDEProblem::PDEProblem(double rho_init, double k_init, double x0_init, double L_init, double t0_init, double T_init, double h_init, double tau_init) {
+
     rho = rho_init;
     k = k_init;
     if(rho != 0)

@@ -21,7 +21,7 @@ int main()
     problem1.f_xx = ([](double x) {return -M_PI*M_PI*sin(M_PI * x);});
     problem1.f_xx_is_set = true;
 
-    CrossScheme(problem1, "test1");
+    CrossScheme(problem1, "test1.txt");
 
     // Тест 2
     PDEProblem problem2(a, x0, L, t0, T, h, tau, what_is_L);
@@ -32,6 +32,6 @@ int main()
     problem2.f_xx = ([](double x) {return -2.;});
     problem2.f_xx_is_set = true;
 
-    CrossScheme(problem2, "test2");
+    CrossScheme(problem2, "test2.txt");
     return 0;
 }

@@ -11,6 +11,8 @@ add_executable(Code
         Libs/FileIO.h
         InputData
         OutputData
+        #OutputData/test1.txt
+        #OutputData/test2.txt
         Libs/PDEProblem.cpp
         Libs/PDEProblem.h
         Libs/PDESolver.cpp

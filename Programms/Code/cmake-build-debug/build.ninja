@@ -51,19 +51,31 @@ build cmake_object_order_depends_target_Code: phony || CMakeFiles/Code.dir
 
 build CMakeFiles/Code.dir/Libs/algebra.cpp.obj: CXX_COMPILER__Code_unscanned_Debug C$:/Users/gerce/Documents/WORK$ DIRECTORY/Численные$ методы/Лабораторные$ работы/Numerical_Methods_LAB3/Programms/Code/Libs/algebra.cpp || cmake_object_order_depends_target_Code
   DEP_FILE = CMakeFiles\Code.dir\Libs\algebra.cpp.obj.d
-  FLAGS = -g -std=gnu++14 -fdiagnostics-color=always
+  FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Code.dir
   OBJECT_FILE_DIR = CMakeFiles\Code.dir\Libs
 
 build CMakeFiles/Code.dir/Libs/FileIO.cpp.obj: CXX_COMPILER__Code_unscanned_Debug C$:/Users/gerce/Documents/WORK$ DIRECTORY/Численные$ методы/Лабораторные$ работы/Numerical_Methods_LAB3/Programms/Code/Libs/FileIO.cpp || cmake_object_order_depends_target_Code
   DEP_FILE = CMakeFiles\Code.dir\Libs\FileIO.cpp.obj.d
-  FLAGS = -g -std=gnu++14 -fdiagnostics-color=always
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Code.dir
+  OBJECT_FILE_DIR = CMakeFiles\Code.dir\Libs
+
+build CMakeFiles/Code.dir/Libs/PDEProblem.cpp.obj: CXX_COMPILER__Code_unscanned_Debug C$:/Users/gerce/Documents/WORK$ DIRECTORY/Численные$ методы/Лабораторные$ работы/Numerical_Methods_LAB3/Programms/Code/Libs/PDEProblem.cpp || cmake_object_order_depends_target_Code
+  DEP_FILE = CMakeFiles\Code.dir\Libs\PDEProblem.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Code.dir
+  OBJECT_FILE_DIR = CMakeFiles\Code.dir\Libs
+
+build CMakeFiles/Code.dir/Libs/PDESolver.cpp.obj: CXX_COMPILER__Code_unscanned_Debug C$:/Users/gerce/Documents/WORK$ DIRECTORY/Численные$ методы/Лабораторные$ работы/Numerical_Methods_LAB3/Programms/Code/Libs/PDESolver.cpp || cmake_object_order_depends_target_Code
+  DEP_FILE = CMakeFiles\Code.dir\Libs\PDESolver.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Code.dir
   OBJECT_FILE_DIR = CMakeFiles\Code.dir\Libs
 
 build CMakeFiles/Code.dir/main.cpp.obj: CXX_COMPILER__Code_unscanned_Debug C$:/Users/gerce/Documents/WORK$ DIRECTORY/Численные$ методы/Лабораторные$ работы/Numerical_Methods_LAB3/Programms/Code/main.cpp || cmake_object_order_depends_target_Code
   DEP_FILE = CMakeFiles\Code.dir\main.cpp.obj.d
-  FLAGS = -g -std=gnu++14 -fdiagnostics-color=always
+  FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Code.dir
   OBJECT_FILE_DIR = CMakeFiles\Code.dir
 
@@ -75,7 +87,7 @@ build CMakeFiles/Code.dir/main.cpp.obj: CXX_COMPILER__Code_unscanned_Debug C$:/U
 #############################################
 # Link the executable Code.exe
 
-build Code.exe: CXX_EXECUTABLE_LINKER__Code_Debug CMakeFiles/Code.dir/Libs/algebra.cpp.obj CMakeFiles/Code.dir/Libs/FileIO.cpp.obj CMakeFiles/Code.dir/main.cpp.obj
+build Code.exe: CXX_EXECUTABLE_LINKER__Code_Debug CMakeFiles/Code.dir/Libs/algebra.cpp.obj CMakeFiles/Code.dir/Libs/FileIO.cpp.obj CMakeFiles/Code.dir/Libs/PDEProblem.cpp.obj CMakeFiles/Code.dir/Libs/PDESolver.cpp.obj CMakeFiles/Code.dir/main.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Code.dir
