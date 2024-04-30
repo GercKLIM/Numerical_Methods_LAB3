@@ -62,7 +62,7 @@ std::vector<double> initializeState(const PDEProblem &problem){
 bool CrossScheme(const PDEProblem &problem, const string &filename) {
 
     // Создание файла
-    std::string path = /*"./OutputData/" + */filename;
+    std::string path = "./OutputData/" + filename;
     std::ofstream fpoints(path);
     std::cout << "log[INFO]: Starting ExplicitScheme" << std::endl;
     std::cout << "log[INFO]: Opening a file \"" << filename << "\" to write..." << std::endl;
