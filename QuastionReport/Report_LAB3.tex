@@ -164,7 +164,7 @@
 	\end{equation*}
 	Преобразуем выражение 
 	\begin{equation*}
-		(Ay, y_{pon{t}}) = -a^2 (y_{\bar{x}}, y_{\bar{x} \pon{t}})
+		(Ay, y_{\pon{t}}) = -a^2 (y_{\bar{x}}, y_{\bar{x} \pon{t}})
 	\end{equation*}
 	используя формулу Грина, то есть суммирование по частям. Так как для любой сеточной функции справедливы соотношения
 	\begin{equation*}
@@ -202,7 +202,7 @@
 	\begin{equation*}
 		\sigma \ge \frac{1}{4} - \frac{h^2}{4a^2 \tau^2}
 	\end{equation*}
-	Отсюда видно, что явная схема с $\sigma = 0$ устойчива при $\tau < \frac{h}{c}$, то есть при выполнении критерия Куранта. 
+	Отсюда видно, что явная схема с $\sigma = 0$ устойчива при $\tau < \frac{h}{a}$, то есть при выполнении критерия Куранта. 
 	При выполнении условия устойчивости справедливо неравенство
 	\begin{equation*}
 		\parallel y \parallel_* \ge a^2 \parallel \down{y}^{(0,5)}_{\bar{x}}\parallel^2
@@ -219,9 +219,11 @@
 		\frac{\hat{y} - 2y + \widecheck{y}}{\tau^2} = a^2 \left( \sigma \frac{\hat{y}_{+1} - 2 \hat{y} + \hat{y}_{-1}}{h^2} + (1 - 2 \sigma) \frac{y_{+1} - 2 y + y_{-1}}{h^2} + \sigma \frac{\widecheck{y}_{+1} - 2 \widecheck{y} + \widecheck{y}_{-1}}{h^2} \right)
 	\end{equation*}
 	и приведя подобные получим
-	\begin{equation*}
-		\hat{y}(1 + 2\sigma \frac{a^2 \tau^2}{h^2}) + y (-2 + (1-2\sigma) \frac{a^2 \tau^2}{h^2}) + \down{y}(1 + 2\sigma \frac{a^2 \tau^2}{h^2}) = \frac{a^2 \tau^2}{h^2} (\sigma \hat{y}_{+1} + \hat{y}_{-1}) + (1 - 2\sigma)(y_{+1} + y_{-1}) + \sigma( \down{y}_{+1} + \down{y}_{-1}).
-	\end{equation*}
+		\begin{multline*}
+			\hat{y}(1 + 2\sigma \frac{a^2 \tau^2}{h^2}) + y (-2 + (1-2\sigma) \frac{a^2 \tau^2}{h^2}) + \down{y}(1 + 2\sigma \frac{a^2 \tau^2}{h^2}) = \\
+			=\frac{a^2 \tau^2}{h^2} (\sigma \hat{y}_{+1} + \hat{y}_{-1}) + (1 - 2\sigma)(y_{+1} + y_{-1}) + \sigma( \down{y}_{+1} + \down{y}_{-1}).
+		\end{multline*}
+	
 	Так как коэффициент перед $y$ может быть отрицательным, то не выполняется условие положительности коэффициентов, а значит схема не является чисто монотонной.
 	
 	\quastion{Предложите способ контроля точности полученного решения.}
@@ -274,7 +276,7 @@
 		\end{equation*}
 		Тогда дискриминант $D = 4 - 16 \frac{4 \tau k} {h^2} \sin^2(\phi)$. Выражение для $rho$ имеет вид
 		\begin{equation*}
-			\rho = \frac{2 \tau k \cos(\phi) \pm \sqrt{h^4 - 4\tau^2 k^2 \sin^2(\phi)}}{h^2 + 4\tau k}/].
+			\rho = \frac{2 \tau k \cos(\phi) \pm \sqrt{h^4 - 4\tau^2 k^2 \sin^2(\phi)}}{h^2 + 4\tau k}.
 		\end{equation*}
 		По модулю $\rho$ будет заведомо меньше и равен единице, следовательно схема является безусловно устойчивой. 
 		
