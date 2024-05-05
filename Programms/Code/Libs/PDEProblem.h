@@ -24,6 +24,7 @@ public:
     double gam; // число Куранта
     int num_time_steps; // количество шагов по времени
     int num_space_steps; // количество шагов по пространству
+    bool reflective_boundaries = false;
 
     PDEProblem(double rho_init, double k_init, double x0_init, double L_init, double t0_init, double T_init, double h_init, double tau_init);
     PDEProblem(double a_init, double x0_init, double L_init, double t0_init, double T_init, double h_init, double tau_init, bool what_is_L_init);

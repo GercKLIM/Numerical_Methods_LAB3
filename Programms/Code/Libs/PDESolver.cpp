@@ -10,7 +10,6 @@
 std::vector<double> firstLayerApproximation(const std::vector<double> &state0, const PDEProblem &problem){
     std::vector<double> new_state = state0;
     double x_i = problem.x0;
-
     new_state[0] = problem.leftBoundaryFunction(x_i);
     for(int i = 1; i < problem.num_space_steps; ++i){
         x_i += problem.h;
@@ -20,6 +19,10 @@ std::vector<double> firstLayerApproximation(const std::vector<double> &state0, c
     x_i += problem.h;
     new_state[problem.num_space_steps] = problem.rightBoundaryFunction(x_i);
 
+    if(problem.reflective_boundaries){
+        new_state[0] = new_state[1];
+        new_state[problem.num_space_steps] = new_state[problem.num_space_steps-1];
+    }
     return new_state;
 }
 
@@ -39,6 +42,11 @@ std::vector<double> firstLayerApproximation(const std::vector<double> &state0, c
     }
     x_i += problem.h;
     new_state[problem.num_space_steps] = problem.rightBoundaryFunction(x_i);
+
+    if(problem.reflective_boundaries){
+        new_state[0] = new_state[1];
+        new_state[problem.num_space_steps] = new_state[problem.num_space_steps-1];
+    }
 
     return new_state;
 }
@@ -124,6 +132,12 @@ bool CrossScheme(const PDEProblem &problem, const string &filename) {
                 x_i += h;
                 state_jpp[i] = 2*state_jp[i] - state_j[i] + tau*tau*a*a/(h*h) * (state_jp[i+1] - 2*state_jp[i] + state_jp[i-1]);
             }
+
+            if(problem.reflective_boundaries){
+                state_jpp[0] = state_jpp[1];
+                state_jpp[problem.num_space_steps] = state_jpp[problem.num_space_steps-1];
+            }
+
             // Запись в файл
             writeVectorToFile(fpoints, t_i, state_jpp);
 

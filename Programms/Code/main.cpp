@@ -7,16 +7,21 @@ void konevs_test() {
     // Сетка по пространству и времени (h, tau)
     std::vector<vector<double>> Web = {
             {0.1, 0.01}, // gam = 0.1
+            {0.05, 0.025}, // gam = 0.5
+            {0.025, 0.01875},// gam = 0.75
+            {0.01, 0.01} // gam = 1.0
+            /* {0.1, 0.01}, // gam = 0.1
             {0.1, 0.05}, // gam = 0.5
             {0.1, 0.075},// gam = 0.75
-            {0.1, 0.1}}; // gam = 1.0
+            {0.1, 0.1}   // gam = 1.0*/
+    };
 
     for (int i = 0; i < 4; i++) {
         /* Задача 1 */
         double a = 1.;
         double x0 = -2.;
         double L = 2.;
-        bool what_is_L = true;
+        bool what_is_L = false;
         double t0 = 0.;
         double T = 1.;
         double h = Web[i][0];
@@ -40,6 +45,7 @@ void konevs_test() {
         problem1.f_xx = ([&](double x) { return 0; });                      // f''_xx анал
         problem1.f_xx = ([&](double x) { return 0; });                      // f''_xx числ
         problem1.f_xx_is_set = true;
+        problem1.reflective_boundaries = true;
 
         CrossScheme(problem1, "konev_test1_" + to_string(problem1.gam) + ".txt");
 
@@ -48,7 +54,7 @@ void konevs_test() {
         a = 1.;
         x0 = -1.;
         L = 1.;
-        what_is_L = true;
+        what_is_L = false;
         t0 = 0.;
         T = 1.;
 
@@ -61,7 +67,7 @@ void konevs_test() {
 
         problem2.initVelocityFunc = ([](double x) {                    // g(x)
             if ((x > -0.5) and (x < 0.5)) {
-                return (1. - abs(x));
+                return (1. - fabs(x));
             } else {
                 return 0.;
             };
@@ -71,6 +77,7 @@ void konevs_test() {
         problem2.f_xx = ([&](double x) { return 0.; });                 // f''_xx анал
         problem2.f_xx = ([&](double x) { return 0.; });                 // f''_xx числ
         problem2.f_xx_is_set = true;
+        problem2.reflective_boundaries = true;
 
         CrossScheme(problem2, "konev_test2_" + to_string(problem2.gam) + ".txt");
 

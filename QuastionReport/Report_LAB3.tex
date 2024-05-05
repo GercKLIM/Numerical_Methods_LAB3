@@ -286,8 +286,43 @@
 		Можно реализовать итерационных процесс по данной схеме таких образом: получить из начальных условий нулевой слой, найти первый временной слой с помощью симметричной схемы и далее использовать трехслойную схему.
 	\end{enumerate}
 	
+	\section{Численные эксперименты}
 	
+	\subsection{Тест 1}
+	\[
+	\begin{cases}
+		u_{tt} = a^2 u_{xx}, \phantom{xxx} 0<x<L, \phantom{xx} t>0, \\
+		u(x,0) = f(x), \phantom{xx} u_t(x,0) = g(x), \phantom{xxx} 0<x<L,\\
+		u(0,t) = \varphi(t), \phantom{xx} u(L,t) =\psi(t), \phantom{xxx} t>0.
+	\end{cases}
+	\]
 	
+	\textbf{А.} Исходные данные: $f(x)=\sin\pi x$, $g(x)=0$, $\varphi(t)=0$, $\psi(t)=0$, $L=1$, $T= 1$.
+	
+	Точное решение: $u(x,t) = \sin \pi x \cos \pi t$. Параметры сетки: $h=0.02$, $\tau=0.001$.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\textwidth]{errors1}
+		\caption{График ошибки численного решения в случае А}
+	\end{figure}
+
+	\textbf{Б.} Исходные данные: $f(x)=x(1-x)$, $g(x)=0$, $\varphi(t)=0$, $\psi(t)=0$, $L=1$, $T= 1$.
+	
+	Точное решение:
+	\[
+	u(x,t) = \dfrac8\pi \sum_{n=0}^{\infty} \dfrac{1}{(2n+1)^3}\sin(2n+1)\pi x \cos(2n+1)\pi t.
+	\]
+	 Параметры сетки: $h=0.02$, $\tau=0.001$.
+	 
+	В качестве точного решения были выбраны слагаемые до номера $k=80$ (требуемая погрешность: $\varepsilon = 10^{-5}$).
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\textwidth]{errors2}
+		\caption{График ошибки численного решения в случае Б}
+	\end{figure}
+
 	\clearpage
 	\begin{thebibliography}{1}
 		\bibitem{1} Галанин М.П., Савенков Е.Б. Методы численного анализа математических моделей. М.: Изд-во МГТУ им. Н.Э. Баумана. 2018. 592 с.
