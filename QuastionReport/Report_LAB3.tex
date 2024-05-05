@@ -19,7 +19,8 @@
 \usepackage{verbatim}
 \usepackage{amsfonts}
 %\usepackage{mathabx}
-
+\usepackage{graphicx}
+\usepackage{subcaption}
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
@@ -288,16 +289,17 @@
 	
 	\section{Численные эксперименты}
 	
-	\subsection{Тест 1}
-	\[
+		\[
 	\begin{cases}
-		u_{tt} = a^2 u_{xx}, \phantom{xxx} 0<x<L, \phantom{xx} t>0, \\
-		u(x,0) = f(x), \phantom{xx} u_t(x,0) = g(x), \phantom{xxx} 0<x<L,\\
-		u(0,t) = \varphi(t), \phantom{xx} u(L,t) =\psi(t), \phantom{xxx} t>0.
+		u_{tt} = u_{xx}, \phantom{xxx} x_0<x<X, \phantom{xx} t>0, \\
+		u(x,0) = f(x), \phantom{xx} u_t(x,0) = g(x), \phantom{xxx} 0<x<X,\\
+		u(0,t) = \varphi(t), \phantom{xx} u(X,t) =\psi(t), \phantom{xxx} t>0.
 	\end{cases}
 	\]
 	
-	\textbf{А.} Исходные данные: $f(x)=\sin\pi x$, $g(x)=0$, $\varphi(t)=0$, $\psi(t)=0$, $L=1$, $T= 1$.
+	\subsection{Тест 1: погрешность вычислений}
+	
+	\textbf{А.} Исходные данные: $f(x)=\sin\pi x$, $g(x)=0$, $\varphi(t)=0$, $\psi(t)=0$, $x_0 = 0$,$X=1$, $T= 1$.
 	
 	Точное решение: $u(x,t) = \sin \pi x \cos \pi t$. Параметры сетки: $h=0.02$, $\tau=0.001$.
 	
@@ -307,7 +309,7 @@
 		\caption{График ошибки численного решения в случае А}
 	\end{figure}
 
-	\textbf{Б.} Исходные данные: $f(x)=x(1-x)$, $g(x)=0$, $\varphi(t)=0$, $\psi(t)=0$, $L=1$, $T= 1$.
+	\textbf{Б.} Исходные данные: $f(x)=x(1-x)$, $g(x)=0$, $\varphi(t)=0$, $\psi(t)=0$, $x_0=0$, $X=1$, $T= 1$.
 	
 	Точное решение:
 	\[
@@ -321,6 +323,79 @@
 		\centering
 		\includegraphics[width=1\textwidth]{errors2}
 		\caption{График ошибки численного решения в случае Б}
+	\end{figure}
+
+	\subsection{Тест 2: число Куранта}
+	
+	Расчёты будем производить  с числами Куранта $\gamma = 0.1, 0.5, 0.75, 1.0$.
+	
+	\textbf{А.}  Исходные данные: $f(x)=1, \phantom{x} x\in [-\frac13, \frac13]$, $g(x)=0$, $\varphi(t)=0$, $\psi(t)=0$, $x_0=-2$, $X=2$, $T= 1$. 
+	
+	\begin{figure}[H]
+		\centering
+		\begin{subfigure}{.5\textwidth}
+			\centering
+			\includegraphics[width=0.85\textwidth]{test1-01}
+		\end{subfigure}%
+		\begin{subfigure}{.5\textwidth}
+			\centering
+			\includegraphics[width=0.85\textwidth]{test1-05}
+		\end{subfigure}
+		\begin{subfigure}{.5\textwidth}
+			\centering
+			\includegraphics[width=0.85\textwidth]{test1-075}
+		\end{subfigure}%
+		\begin{subfigure}{.5\textwidth}
+			\centering
+			\includegraphics[width=0.85\textwidth]{test1-1}
+		\end{subfigure}
+		\caption{Решения 2А для разных $\gamma$ (слева направо и сверху вниз: $0.1$, $0.5$, $0.75$, $1.0$) в момент времени $T$}
+	\end{figure}
+	
+	\textbf{Б.}  Исходные данные: $g(x)=1-2|x|,\phantom{x}x\in[-\frac12,\frac12]$, $\varphi(t)=0$, $\psi(t)=0$, $x_0=-1$, $X=1$, $T= 1$. 
+	
+	\begin{figure}[H]
+		\centering
+		\begin{subfigure}{.5\textwidth}
+			\centering
+			\includegraphics[width=0.75\textwidth]{test2-01}
+		\end{subfigure}%
+		\begin{subfigure}{.5\textwidth}
+			\centering
+			\includegraphics[width=0.75\textwidth]{test2-05}
+		\end{subfigure}
+		\begin{subfigure}{.5\textwidth}
+			\centering
+			\includegraphics[width=0.75\textwidth]{test2-075}
+		\end{subfigure}%
+		\begin{subfigure}{.5\textwidth}
+			\centering
+			\includegraphics[width=0.75\textwidth]{test2-1}
+		\end{subfigure}
+		\caption{Решения 2Б для разных $\gamma$ (слева направо и сверху вниз: $0.1$, $0.5$, $0.75$, $1.0$) в момент времени $T$}
+	\end{figure}
+	
+		\textbf{В.}  Исходные данные: $f(x)=0$, $g(x)=0$, $\varphi(t)=\sin t$, $\psi(t)=0$, $x_0=0$, $X=4\pi$, $T= 1$. 
+	
+	\begin{figure}[H]
+		\centering
+		\begin{subfigure}{.5\textwidth}
+			\centering
+			\includegraphics[width=0.75\textwidth]{test3-01}
+		\end{subfigure}%
+		\begin{subfigure}{.5\textwidth}
+			\centering
+			\includegraphics[width=0.75\textwidth]{test3-05}
+		\end{subfigure}
+		\begin{subfigure}{.5\textwidth}
+			\centering
+			\includegraphics[width=0.75\textwidth]{test3-075}
+		\end{subfigure}%
+		\begin{subfigure}{.5\textwidth}
+			\centering
+			\includegraphics[width=0.75\textwidth]{test3-1}
+		\end{subfigure}
+		\caption{Решения 2В для разных $\gamma$ (слева направо и сверху вниз: $0.1$, $0.5$, $0.75$, $1.0$) в момент времени $T$}
 	\end{figure}
 
 	\clearpage
