@@ -4,6 +4,7 @@
 
 void konevs_test() {
 
+    double eps = 1e-10;
     // Сетка по пространству и времени (h, tau)
     std::vector<vector<double>> Web = {
           /*  {0.1, 0.01}, // gam = 0.1
@@ -42,8 +43,10 @@ void konevs_test() {
         problem1.initVelocityFunc = ([](double x) { return 0.; });       // g(x)
         problem1.leftBoundaryFunction = ([](double t) { return 0.; });   // phi(x)
         problem1.rightBoundaryFunction = ([](double t) { return 0.; });  // psi(x)
-        problem1.f_xx = ([&](double x) { return 0; });                      // f''_xx анал
-        problem1.f_xx = ([&](double x) { return 0; });                      // f''_xx числ
+        //problem1.f_xx = ([&](double x) { return 0; });                      // f''_xx анал
+
+        // f''_xx числ
+        problem1.f_xx = ([&](double x) { return (problem1.initDeflectionFunc(x + eps) + 2 * problem1.initDeflectionFunc(x) + problem1.initDeflectionFunc(x - eps)) / (eps * eps);});
         problem1.f_xx_is_set = true;
         //problem1.reflective_boundaries = true;
 
@@ -74,8 +77,10 @@ void konevs_test() {
         });
         problem2.leftBoundaryFunction = ([](double t) { return 0.; });   // phi(x)
         problem2.rightBoundaryFunction = ([](double t) { return 0.; });  // psi(x)
-        problem2.f_xx = ([&](double x) { return 0.; });                 // f''_xx анал
-        problem2.f_xx = ([&](double x) { return 0.; });                 // f''_xx числ
+        //problem2.f_xx = ([&](double x) { return 0.; });                 // f''_xx анал
+
+        // f''_xx числ
+        problem2.f_xx = ([&](double x) {return (problem2.initDeflectionFunc(x + eps) + 2 * problem2.initDeflectionFunc(x) + problem2.initDeflectionFunc(x - eps)) / (eps * eps);});
         problem2.f_xx_is_set = true;
         //problem2.reflective_boundaries = true;
 
@@ -99,13 +104,17 @@ void konevs_test() {
         problem3.initVelocityFunc = ([](double x) { return 0.; });
         problem3.leftBoundaryFunction = ([](double t) { return sin(t); });   // phi(x)
         problem3.rightBoundaryFunction = ([](double t) { return 0.; });  // psi(x)
-        problem3.f_xx = ([&](double x) { return 0.; });                 // f''_xx анал
-        problem3.f_xx = ([&](double x) { return 0.; });                 // f''_xx числ
+        //problem3.f_xx = ([&](double x) { return 0.; });                 // f''_xx анал
+
+        // f''_xx числ
+        problem3.f_xx = ([&](double x) {return (problem3.initDeflectionFunc(x + eps) + 2 * problem3.initDeflectionFunc(x) + problem3.initDeflectionFunc(x - eps)) / (eps * eps); });
         problem3.f_xx_is_set = true;
 
         CrossScheme(problem3, "konev_test3_" + to_string(problem3.gam) + ".txt");
     }
 }
+
+
 int main() {
 
     double a = 1.;
