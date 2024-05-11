@@ -112,6 +112,15 @@ bool CrossScheme(const PDEProblem &problem, const string &filename) {
         double t_i = t0;
         double x_i = x0;
 
+
+        // Запись сетки по пространству в файл:
+        std::vector<double> setka(num_space_steps+1, 0);
+        for (int i = 0; i < num_space_steps+1; i++) {
+            setka[i] = h * i;
+        }
+        writeVectorToFile(fpoints, 0., setka);
+
+
         // Запись первых двух слоёв в файл
         writeVectorToFile(fpoints, t_i, state_j);
         t_i += tau;

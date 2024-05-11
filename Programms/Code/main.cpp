@@ -114,9 +114,40 @@ void konevs_test() {
     }
 }
 
+/* Функция для создания данных для таблиц */
+void make_data_for_tables() {
 
-int main() {
+    /* Тестируем на тесте №1 из методички */
+    double a = 1.;
+    double x0 = 0.;
+    double L = 1.;
+    bool what_is_L = true; // флаг на указание размера (в случае false - будем передавать координату правого конца)
+    double t0 = 0.;
+    double T = 1.;
+    double h = 0.2;
+    double tau = 0.1;
 
+    // Тест 1
+
+
+    for (int i = 0; i < 6; i++) {
+
+        PDEProblem problem1(a, x0, L, t0, T, h, tau, what_is_L);
+        problem1.initDeflectionFunc = ([](double x) {return sin(M_PI * x);});
+        problem1.initVelocityFunc = ([](double x){return 0.;});
+        problem1.leftBoundaryFunction = ([](double t){return 0.;});
+        problem1.rightBoundaryFunction = ([](double t){return 0.;});
+        problem1.f_xx = ([](double x) {return -M_PI*M_PI*sin(M_PI * x);});
+        problem1.f_xx_is_set = true;
+
+        tau = tau / 4;
+        h = h / 4;
+        CrossScheme(problem1, "data_for_tables/test1/test1_" + to_string(i) + ".txt");
+    }
+}
+
+/* Тесты из методички */
+void tests() {
     double a = 1.;
     double x0 = 0.;
     double L = 1.;
@@ -135,7 +166,7 @@ int main() {
     problem1.f_xx = ([](double x) {return -M_PI*M_PI*sin(M_PI * x);});
     problem1.f_xx_is_set = true;
 
-    //CrossScheme(problem1, "test1.txt");
+    CrossScheme(problem1, "test1.txt");
 
     // Тест 2
     PDEProblem problem2(a, x0, L, t0, T, h, tau, what_is_L);
@@ -146,9 +177,12 @@ int main() {
     problem2.f_xx = ([](double x) {return -2.;});
     problem2.f_xx_is_set = true;
 
-    //CrossScheme(problem2, "test2.txt");
-
-    konevs_test();
+    CrossScheme(problem2, "test2.txt");
+}
+int main() {
+    //tests();
+    make_data_for_tables();
+    //konevs_test();
     return 0;
 
 }
