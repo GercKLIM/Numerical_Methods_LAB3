@@ -4,13 +4,13 @@
 
 void konevs_test() {
 
-    double eps = 1e-10;
+    double eps = 1e-6;
     // Сетка по пространству и времени (h, tau)
     std::vector<vector<double>> Web = {
             {0.1, 0.01}, // gam = 0.1
             {0.05, 0.025}, // gam = 0.5
             {0.025, 0.01875},// gam = 0.75
-            {0.01, 0.01} // gam = 1.0
+            {0.01, 0.1} // gam = 1.0
             /* {0.1, 0.01}, // gam = 0.1
             {0.1, 0.05}, // gam = 0.5
             {0.1, 0.075},// gam = 0.75
@@ -44,14 +44,14 @@ void konevs_test() {
         problem1.initVelocityFunc = ([](double x) { return 0.; });       // g(x)
         problem1.leftBoundaryFunction = ([](double t) { return 0.; });   // phi(x)
         problem1.rightBoundaryFunction = ([](double t) { return 0.; });  // psi(x)
-        problem1.f_xx = ([&](double x) { return 0; });                      // f''_xx анал
+        problem1.f_xx = ([&](double x) { return 0.0; });                      // f''_xx анал
         problem1.f_xx_is_set = true;
 
         CrossScheme(problem1, "konev_tests/anal_fxx/konev_test1_anal_" + to_string(problem1.gam) + ".txt");
 
 
         // f''_xx числ
-        problem1.f_xx = ([&](double x) { return (problem1.initDeflectionFunc(x + eps) + 2 * problem1.initDeflectionFunc(x) + problem1.initDeflectionFunc(x - eps)) / (eps * eps);});
+        problem1.f_xx = ([&](double x) { return (problem1.initDeflectionFunc(x + eps) - 2 * problem1.initDeflectionFunc(x) + problem1.initDeflectionFunc(x - eps)) / (eps * eps);});
         problem1.f_xx_is_set = true;
         //problem1.reflective_boundaries = true;
 
@@ -89,7 +89,7 @@ void konevs_test() {
         CrossScheme(problem2, "konev_tests/anal_fxx/konev_test2_anal_" + to_string(problem2.gam) + ".txt");
 
         // f''_xx числ
-        problem2.f_xx = ([&](double x) {return (problem2.initDeflectionFunc(x + eps) + 2 * problem2.initDeflectionFunc(x) + problem2.initDeflectionFunc(x - eps)) / (eps * eps);});
+        problem2.f_xx = ([&](double x) {return (problem2.initDeflectionFunc(x + eps) - 2 * problem2.initDeflectionFunc(x) + problem2.initDeflectionFunc(x - eps)) / (eps * eps);});
         problem2.f_xx_is_set = true;
         //problem2.reflective_boundaries = true;
 
@@ -120,7 +120,7 @@ void konevs_test() {
 
 
         // f''_xx числ
-        problem3.f_xx = ([&](double x) {return (problem3.initDeflectionFunc(x + eps) + 2 * problem3.initDeflectionFunc(x) + problem3.initDeflectionFunc(x - eps)) / (eps * eps); });
+        problem3.f_xx = ([&](double x) {return (problem3.initDeflectionFunc(x + eps) - 2 * problem3.initDeflectionFunc(x) + problem3.initDeflectionFunc(x - eps)) / (eps * eps); });
         problem3.f_xx_is_set = true;
 
         CrossScheme(problem3, "konev_tests/num_fxx/konev_test3_num_" + to_string(problem3.gam) + ".txt");
@@ -194,8 +194,8 @@ void tests() {
 }
 int main() {
     //tests();
-    make_data_for_tables();
-    //konevs_test();
+    //make_data_for_tables();
+    konevs_test();
     return 0;
 
 }
