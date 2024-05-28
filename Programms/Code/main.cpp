@@ -92,7 +92,7 @@ void konevs_test() {
         L = 4. * M_PI;
         what_is_L = true;
         t0 = 0.;
-        T = 1.;
+        T = 100.;
 
         h = Web[i][0];
         tau = Web[i][1];
